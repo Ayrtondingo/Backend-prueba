@@ -1,5 +1,4 @@
-import pkg from 'pg';
-const { Pool } = pkg;
+const { Pool } = require('pg');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -8,4 +7,6 @@ const pool = new Pool({
   }
 });
 
-export default pool;
+pool.connect()
+  .then(() => console.log("✅ Conectado a PostgreSQL"))
+  .catch(err => console.error("❌ Error DB:", err));
